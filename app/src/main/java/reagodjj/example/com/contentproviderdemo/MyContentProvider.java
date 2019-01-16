@@ -1,6 +1,7 @@
 package reagodjj.example.com.contentproviderdemo;
 
 import android.content.ContentProvider;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,17 +11,19 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 public class MyContentProvider extends ContentProvider {
+    SQLiteDatabase sqLiteDatabase;
+
     public MyContentProvider() {
     }
 
     @Override
-    public int delete(Uri uri, String selection, String[] selectionArgs) {
+    public int delete(@NonNull Uri uri, String selection, String[] selectionArgs) {
         // Implement this to handle requests to delete one or more rows.
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
     @Override
-    public String getType(Uri uri) {
+    public String getType(@NonNull Uri uri) {
         // TODO: Implement this to handle requests for the MIME type of the data
         // at the given URI.
         throw new UnsupportedOperationException("Not yet implemented");
@@ -30,10 +33,11 @@ public class MyContentProvider extends ContentProvider {
     public Uri insert(@NonNull Uri uri, ContentValues values) {
         // TODO: Implement this to handle requests to insert a new row.
         Log.e("RealgodJJ", "调用Insert方法");
+        long id = sqLiteDatabase.insert("student_tb", null, values);
+        ContentUris.withAppendedId(uri, id);
+        //将id追加到Uri后面
         return null;
     }
-
-    SQLiteDatabase sqLiteDatabase;
 
     @Override
     public boolean onCreate() {
@@ -59,14 +63,14 @@ public class MyContentProvider extends ContentProvider {
     }
 
     @Override
-    public Cursor query(Uri uri, String[] projection, String selection,
+    public Cursor query(@NonNull Uri uri, String[] projection, String selection,
                         String[] selectionArgs, String sortOrder) {
         // TODO: Implement this to handle query requests from clients.
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
     @Override
-    public int update(Uri uri, ContentValues values, String selection,
+    public int update(@NonNull Uri uri, ContentValues values, String selection,
                       String[] selectionArgs) {
         // TODO: Implement this to handle requests to update one or more rows.
         throw new UnsupportedOperationException("Not yet implemented");

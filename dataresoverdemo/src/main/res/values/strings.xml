@@ -10,4 +10,5 @@
     <string name="search">查询</string>
     <string name="delete">删除</string>
     <string name="update">修改</string>
+    <string name="add_student_success">学生添加成功！学号为：%1$d</string>
 </resources>

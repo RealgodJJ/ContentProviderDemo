@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">dataresoverdemo</string>
+    <string name="name">姓名：</string>
+    <string name="age">年龄：</string>
+    <string name="gender">性别:</string>
+    <string name="male">男</string>
+    <string name="female">女</string>
+    <string name="number">编号</string>
+    <string name="add">添加</string>
+    <string name="search">查询</string>
+    <string name="delete">删除</string>
+    <string name="update">修改</string>
+</resources>

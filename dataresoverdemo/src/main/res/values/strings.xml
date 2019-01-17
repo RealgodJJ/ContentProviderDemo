@@ -11,4 +11,9 @@
     <string name="delete">删除</string>
     <string name="update">修改</string>
     <string name="add_student_success">学生添加成功！学号为：%1$d</string>
+    <string name="delete_fail">删除失败！</string>
+    <string name="delete_success">删除成功！</string>
+    <string name="update_success">修改成功！</string>
+    <string name="update_fail">修改失败！</string>
+    <string name="urimatcher_uri">利用UriMatcher去解析Uri</string>
 </resources>

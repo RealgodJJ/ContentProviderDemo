@@ -101,6 +101,13 @@
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/bt_analysis"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/urimatcher_uri"
+        android:onClick="operate"/>
+
     <ListView
         android:id="@+id/lv_select_item"
         android:layout_width="match_parent"

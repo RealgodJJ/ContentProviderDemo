@@ -1,1 +1,1 @@
-include ':app', ':dataresoverdemo'
+include ':app', ':dataresoverdemo', ':getdatafromsystemdemo'

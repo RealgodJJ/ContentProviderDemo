@@ -125,8 +125,11 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.bt_uri_analysis:
-                resolver.insert(Uri.parse("com.example.myprovider/whatever?name=张三&age=23&gender=男"),
+                Uri uri1 = resolver.insert(Uri.parse("content://com.example.myprovider/whatever?name=张三&age=23&gender=男"),
                         new ContentValues());
+                long id1 = ContentUris.parseId(uri1);
+                Toast.makeText(MainActivity.this, String.format(getResources()
+                        .getString(R.string.add_student_success), id1), Toast.LENGTH_SHORT).show();
                 break;
         }
     }

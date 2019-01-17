@@ -61,8 +61,23 @@ public class MyContentProvider extends ContentProvider {
     @Override
     public Uri insert(@NonNull Uri uri, ContentValues values) {
         Log.e("RealgodJJ", "调用Insert方法");
-        long id = sqLiteDatabase.insert("student_tb", null, values);
-//        ContentUris.withAppendedId(uri, id);
+        long id;
+        if (values.size() > 0) {
+            id = sqLiteDatabase.insert("student_tb", null, values);
+        } else {
+            String authority = uri.getAuthority();
+            String path = uri.getPath();
+            String query = uri.getQuery();
+            String name = uri.getQueryParameter("name");
+            String age = uri.getQueryParameter("age");
+            String gender = uri.getQueryParameter("gender");
+            Log.e("RealgodJJ", "主机名：" + authority + "路径：" + path + "，添加数据：" + query
+                    + "，姓名：" + name + "，年龄：" + age + "，性别：" + gender);
+            values.put("name", name);
+            values.put("age", age);
+            values.put("gender", gender);
+            id = sqLiteDatabase.insert("student_tb", null, values);
+        }
         //将id追加到Uri后面
         return ContentUris.withAppendedId(uri, id);
     }

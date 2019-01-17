@@ -15,5 +15,6 @@
     <string name="delete_success">删除成功！</string>
     <string name="update_success">修改成功！</string>
     <string name="update_fail">修改失败！</string>
-    <string name="urimatcher_uri">利用UriMatcher去解析Uri</string>
+    <string name="uri_matcher_uri">利用UriMatcher去解析Uri</string>
+    <string name="uri_its_uri">利用URI自带的解析方法解析Uri</string>
 </resources>

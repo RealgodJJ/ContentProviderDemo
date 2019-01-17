@@ -123,6 +123,11 @@ public class MainActivity extends AppCompatActivity {
                 resolver.delete(Uri.parse("content://com.example.myprovider/nihaoshijie/ab90"),
                         null, null);
                 break;
+
+            case R.id.bt_uri_analysis:
+                resolver.insert(Uri.parse("com.example.myprovider/whatever?name=张三&age=23&gender=男"),
+                        new ContentValues());
+                break;
         }
     }
 }

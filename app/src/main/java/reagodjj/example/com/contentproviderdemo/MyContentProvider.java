@@ -62,9 +62,9 @@ public class MyContentProvider extends ContentProvider {
     public Uri insert(@NonNull Uri uri, ContentValues values) {
         Log.e("RealgodJJ", "调用Insert方法");
         long id = sqLiteDatabase.insert("student_tb", null, values);
-        ContentUris.withAppendedId(uri, id);
+//        ContentUris.withAppendedId(uri, id);
         //将id追加到Uri后面
-        return null;
+        return ContentUris.withAppendedId(uri, id);
     }
 
     @Override

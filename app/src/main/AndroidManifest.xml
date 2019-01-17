@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="reagodjj.example.com.contentproviderdemo">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -23,9 +25,9 @@
             android:name=".MyContentProvider"
             android:authorities="com.example.myprovider"
             android:enabled="true"
-            android:exported="true">
+            android:exported="true"
+            tools:ignore="ExportedContentProvider" />
 
-        </provider>
     </application>
 
 </manifest>

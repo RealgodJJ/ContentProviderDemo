@@ -105,7 +105,14 @@
         android:id="@+id/bt_analysis"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/urimatcher_uri"
+        android:text="@string/uri_matcher_uri"
+        android:onClick="operate"/>
+
+    <Button
+        android:id="@+id/bt_uri_analysis"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/uri_its_uri"
         android:onClick="operate"/>
 
     <ListView

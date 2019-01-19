@@ -4,6 +4,7 @@
     package="reagodjj.example.com.getdatafromsystemdemo">
 
     <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
         android:allowBackup="true"

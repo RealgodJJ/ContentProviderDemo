@@ -2,6 +2,9 @@ package reagodjj.example.com.getdatafromsystemdemo;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.ContentResolver;
+import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -45,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         lvMessage = findViewById(R.id.lv_message);
 
         isAllGranted = checkPermissionAllGranted(new String[]{Manifest.permission.READ_SMS,
-                Manifest.permission.READ_CONTACTS});
+                Manifest.permission.READ_CONTACTS, Manifest.permission.WRITE_CONTACTS});
 
         if (isAllGranted) {
             doBack();
@@ -54,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
         //申请权限
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_SMS,
-                Manifest.permission.READ_CONTACTS}, MY_PERMISSION_REQUEST_CODE);
+                Manifest.permission.READ_CONTACTS, Manifest.permission.WRITE_CONTACTS}, MY_PERMISSION_REQUEST_CODE);
 
         btGetMessage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,6 +126,35 @@ public class MainActivity extends AppCompatActivity {
                             new int[]{R.id.tv_address, R.id.tv_body});
                     lvMessage.setAdapter(simpleAdapter);
                 }
+            }
+        });
+
+        btAddContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //1.往一个ContentProvider中插入一条空数据,获取新生成的id
+                //2.利用刚刚生成的id分别组合姓名和电话号码往另一个ContentProvider中插入数据
+                ContentResolver contentResolver = getContentResolver();
+                ContentValues contentValues = new ContentValues();
+                Uri uri = contentResolver.insert(ContactsContract.RawContacts.CONTENT_URI, contentValues);
+                long id = ContentUris.parseId(uri);
+
+                //插入姓名
+                contentValues.put(ContactsContract.CommonDataKinds.StructuredName.GIVEN_NAME, "XXX");//指定姓名列的内容
+                contentValues.put(ContactsContract.Data.RAW_CONTACT_ID, id);//指定和姓名关联的编号列的内容
+                contentValues.put(ContactsContract.Data.MIMETYPE,
+                        ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE);//指定该行数据的类型
+                contentResolver.insert(ContactsContract.Data.CONTENT_URI, contentValues);
+
+                contentValues.clear();
+                //插入电话号码
+                contentValues.put(ContactsContract.CommonDataKinds.Phone.NUMBER, "13439127523");//指定电话号码列的内容
+                contentValues.put(ContactsContract.Data.RAW_CONTACT_ID, id);//指定和电话号码列关联的编号列内容
+                contentValues.put(ContactsContract.Data.MIMETYPE,
+                        ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE);//指定该行数据的类型
+                contentValues.put(ContactsContract.CommonDataKinds.Phone.TYPE,
+                        ContactsContract.CommonDataKinds.Phone.TYPE_MOBILE);//指定联系方式的类型
+                contentResolver.insert(ContactsContract.Data.CONTENT_URI, contentValues);
             }
         });
     }
